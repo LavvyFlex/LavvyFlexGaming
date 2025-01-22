@@ -103,7 +103,7 @@
         .flame {
             position: absolute;
             border-radius: 50%;
-            animation: rise 3s infinite ease-in;
+            animation: rise 3s infinite ease-in, fall 3s infinite ease-in;
         }
 
         .flame.red {
@@ -130,6 +130,17 @@
                 opacity: 0;
             }
         }
+
+        @keyframes fall {
+            0% {
+                transform: translate(-50%, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, 100vh) scale(0.5);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -140,17 +151,15 @@
     </video>
 
     <div class="container">
-        <h1>Here is My Portfolio</h1>
+        <h1>Click to know me</h1>
         <div class="buttons">
-            <a href="/portfolio">My Portfolio</a>
+            <a href="https://lavvyflex.github.io/Portfolio/#contact">My Portfolio</a>
         </div>
     </div>
 
     <div class="fire" id="fire"></div>
 
     <script>
-
-
         // Create flame particles
         const fireContainer = document.getElementById('fire');
         function createFlame(color) {
