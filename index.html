@@ -3,87 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Vibrant Blog</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Flame Portfolio</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: black;
+            color: white;
+            overflow: hidden;
+        }
+
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            position: relative;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(45deg, #ff0000, #ff8c00, #ffd700, #ff0000);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s infinite, wave 2s infinite;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes wave {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        .buttons a {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 30px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            background: linear-gradient(45deg, #6a5acd, #48d1cc, #ff6347, #ffd700);
+            background-size: 300% 300%;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+            text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: gradientShift 3s infinite;
+        }
+
+        .buttons a:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Fire animations */
+        .fire {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .flame {
+            position: absolute;
+            border-radius: 50%;
+            animation: rise 3s infinite ease-in;
+        }
+
+        .flame.red {
+            background: rgba(255, 0, 0, 0.5);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+            width: 20px;
+            height: 20px;
+        }
+
+        .flame.blue {
+            background: rgba(0, 0, 255, 0.5);
+            box-shadow: 0 0 20px rgba(0, 0, 255, 0.8);
+            width: 25px;
+            height: 25px;
+        }
+
+        @keyframes rise {
+            0% {
+                transform: translate(-50%, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -100vh) scale(0.5);
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Background Video -->
+    <video class="background-video" autoplay loop muted>
+        <source src="nissan-gtr-r35-drift.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 
-    <!-- Navigation Bar -->
-    <header>
-        <nav>
-            <div class="logo">
-                <a href="#">VibrantBlog</a>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#posts">Blog Posts</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="nav-toggle">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Explore the World of Colors</h1>
-            <p>Unlock creativity, stories, and vibrant ideas with every post.</p>
-            <a href="#posts" class="cta-btn">Discover Posts</a>
+    <div class="container">
+        <h1>Welcome to My Fiery Portfolio</h1>
+        <div class="buttons">
+            <a href="/portfolio">My Portfolio</a>
+            <a href="/contact">Contact Me</a>
         </div>
-    </section>
+    </div>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <h2>About Me</h2>
-        <p>I'm a creative writer passionate about sharing insights on design, tech, and life. Welcome to my colorful corner of the web where ideas come alive in every post.</p>
-    </section>
+    <div class="fire" id="fire"></div>
 
-    <!-- Blog Posts Section -->
-    <section id="contact" class="contact">
-    <h2>Contact Me</h2>
-    <form action="https://formspree.io/f/{your-form-id}" method="POST">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" placeholder="Your Name" required>
-
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="Your Email" required>
-
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
-
-        <button type="submit" class="cta-btn">Send Message</button>
-    </form>
-</section>
+    <script>
 
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <h2>Contact Me</h2>
-        <form action="#" method="post">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required>
+        // Create flame particles
+        const fireContainer = document.getElementById('fire');
+        function createFlame(color) {
+            const flame = document.createElement('div');
+            flame.classList.add('flame', color);
+            flame.style.left = Math.random() * 100 + 'vw';
+            flame.style.animationDuration = 2 + Math.random() * 3 + 's';
+            fireContainer.appendChild(flame);
 
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+            setTimeout(() => {
+                flame.remove();
+            }, 5000);
+        }
 
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-
-            <button type="submit" class="cta-btn">Send Message</button>
-        </form>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 VibrantBlog. All Rights Reserved.</p>
-    </footer>
-
-    <script src="script.js"></script>
+        setInterval(() => {
+            createFlame('red');
+            createFlame('blue');
+        }, 300);
+    </script>
 </body>
 </html>
